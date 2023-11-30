@@ -1,7 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import Select
 import pandas as pd
+import time
 
 website = 'https://www.adamchoi.co.uk/overs/detailed'
 path = r'D:\RepoGithub\chromedriver-win64\chromedriver.exe'
@@ -21,6 +23,10 @@ try:
 
 	all_matches_button = driver.find_element(by="xpath", value='//label[@analytics-event="All matches"]')
 	all_matches_button.click()
+
+	dropdown = Select(driver.find_element(by="id", value='country'))
+	dropdown.select_by_visible_text('Spain')
+	time.sleep(3)
 
 	matches = driver.find_elements(by="tag name", value='tr')
 	date = []
